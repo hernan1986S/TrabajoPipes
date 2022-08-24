@@ -1,2 +1,4 @@
-<button (click)="agregarNuevoAlumno()">Agregar nuevos Alumnos</button>
+<button (click)="agregarNuevoAlumno()">Agregar nuevo Curso</button>
+<pre>Cursos:  {{ cursos | json }}</pre>
 <pre>Alumnos:  {{ alumnos | json }}</pre>
+<pre>Observable de cursos:  {{ cursos$ | async | json }}</pre>

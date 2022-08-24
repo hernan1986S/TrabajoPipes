@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -17,8 +17,11 @@ export class RxjsService {
     {id: 8, nombre: 'Kiti', curso: 'JavaScript'},
      ];
      alumnosObservable: Observable<any>;
+     cursos: any[] = [];
+     cursosSubjet: Subject<any>
 
   constructor(){
+    this.cursosSubjet = new Subject();
     this.alumnosObservable = new Observable<any>((suscriptor) =>{
       suscriptor.next(this.alumnos);
 
@@ -46,10 +49,15 @@ export class RxjsService {
   obtenerObservableAlumnos(){
     return this.alumnosObservable;
   }
-  agregarNuevoAlumno(alumno: any){
-    this.alumnos.push(alumno);
-    console.log(this.alumnos);
 
 
+  obtenerObservableCursos(){
+    return this.cursosSubjet.asObservable();
+  }
+
+  agregarNuevoCurso(curso: any){
+    this.cursos.push(curso);
+    this.cursosSubjet.next(this.cursos);
+    console.log(this.cursos);
   }
 }
